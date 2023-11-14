@@ -1,6 +1,7 @@
 package christmas.util;
 
 public enum ErrorMessage {
+    NULL_INPUT_ERROR("null은 입력할 수 없습니다."),
     EXIST_OF_VALUE_ERROR("입력 값이 존재하지 않습니다."),
     NUMERIC_INPUT_ERROR("숫자만 입력이 가능합니다."),
     INVALID_DATE_ERROR("유효하지 않은 날짜입니다. 다시 입력해 주세요."),
