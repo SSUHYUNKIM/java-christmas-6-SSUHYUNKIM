@@ -3,7 +3,6 @@ package christmas.util;
 import christmas.model.Menus;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import static christmas.constant.NumericConstant.*;
@@ -74,8 +73,15 @@ public class Validator {
         if (inputValue.length != 2 || isEmpty(inputValue[0]) || isEmpty(inputValue[1])) {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
         }
-        //추후 수정
-        checkIsInteger(inputValue[1]);
+        checkValidAmount(inputValue[1]);
+    }
+
+    public static void checkValidAmount(String inputValue) {
+        try {
+            Integer.parseInt(inputValue);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
+        }
     }
 
     private static boolean isEmpty(String userInput) {

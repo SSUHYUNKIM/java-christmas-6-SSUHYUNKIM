@@ -6,8 +6,9 @@ import christmas.util.message.InputMessage;
 import christmas.util.Validator;
 import christmas.util.Converter;
 
-import java.util.HashMap;
 import java.util.Map;
+
+import static christmas.util.message.ErrorMessage.INVALID_DATE_ERROR;
 
 public class InputView {
     public int getDate() {
@@ -18,7 +19,7 @@ public class InputView {
             input = Validator.removeSpacing(input);
             return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println(INVALID_DATE_ERROR.getMessage());
             return getDate();
         }
     }

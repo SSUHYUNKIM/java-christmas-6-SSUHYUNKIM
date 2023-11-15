@@ -25,6 +25,10 @@ public enum Menus {
     private static final Map<String, Menus> menuNames =
             Collections.unmodifiableMap(Stream.of(values())
                     .collect(Collectors.toMap(Menus::getName, Function.identity())));
+
+    private static final Map<Menus, String> menuNamesByMenus =
+            Collections.unmodifiableMap(Stream.of(values())
+                    .collect(Collectors.toMap(Function.identity(), Menus::getName)));
     private final String category;
     private final String name;
     private final int price;
@@ -37,6 +41,14 @@ public enum Menus {
 
     public static Menus getMenusByName(String name) {
         return Optional.ofNullable(menuNames.get(name)).orElse(NONE);
+    }
+
+    public static String getNameByMenus(Menus menu) {
+        return Optional.ofNullable(menuNamesByMenus.get(menu)).orElse(NONE.name);
+    }
+
+    public static int calculateEachPrice(Menus menu, int amount) {
+        return menu.price * amount;
     }
 
     public String getCategory() {
