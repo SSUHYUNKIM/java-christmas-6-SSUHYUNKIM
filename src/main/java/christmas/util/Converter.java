@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-import christmas.util.Validator;
-
-import static christmas.util.ErrorMessage.INVALID_ORDER_ERROR;
+import static christmas.util.message.ErrorMessage.INVALID_ORDER_ERROR;
 
 public class Converter {
     private final String MENU_SEPERATOR = ",";
@@ -29,7 +27,7 @@ public class Converter {
     private Map<String, Integer> convertStringListToMap(List<String> inputValue) {
         Map<String, Integer> inputValues = new HashMap<>();
         List<String[]> orders = separateMenuAndAmount(inputValue);
-        for (String[] order : orders) {
+        for (var order : orders) {
             Validator.checkValidOrder(order);
             inputValues.put(order[0], Integer.parseInt(order[1]));
         }
