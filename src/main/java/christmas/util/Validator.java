@@ -24,7 +24,7 @@ public class Validator {
         }
     }
 
-    private static String removeSpacing(String inputValue) {
+    public static String removeSpacing(String inputValue) {
         return inputValue.replaceAll(" ", "");
     }
 

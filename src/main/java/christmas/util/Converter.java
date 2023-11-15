@@ -9,22 +9,22 @@ import java.util.stream.Collectors;
 import static christmas.util.message.ErrorMessage.INVALID_ORDER_ERROR;
 
 public class Converter {
-    private final String MENU_SEPERATOR = ",";
-    private final String MENU_AMOUNT_SEPERATOR = "-";
+    private static final String MENU_SEPERATOR = ",";
+    private static final String MENU_AMOUNT_SEPERATOR = "-";
 
-    public Map<String, Integer> convertStringToMap(String inputValue) {
+    public static Map<String, Integer> convertStringToMap(String inputValue) {
         List<String> input = convertStringToStringList(inputValue);
         return convertStringListToMap(input);
     }
 
-    private List<String> convertStringToStringList(String inputValue) {
+    private static List<String> convertStringToStringList(String inputValue) {
         String[] split = inputValue.split(MENU_SEPERATOR);
         Validator.checkMenuAmountSeparator(split);
         return Stream.of(split)
                 .collect(Collectors.toList());
     }
 
-    private Map<String, Integer> convertStringListToMap(List<String> inputValue) {
+    private static Map<String, Integer> convertStringListToMap(List<String> inputValue) {
         Map<String, Integer> inputValues = new HashMap<>();
         List<String[]> orders = separateMenuAndAmount(inputValue);
         for (var order : orders) {
@@ -37,7 +37,7 @@ public class Converter {
         return inputValues;
     }
 
-    private List<String[]> separateMenuAndAmount(List<String> order) {
+    private static List<String[]> separateMenuAndAmount(List<String> order) {
         return order.stream()
                 .map((menuOrder) -> menuOrder.split(MENU_AMOUNT_SEPERATOR))
                 .collect(Collectors.toList());

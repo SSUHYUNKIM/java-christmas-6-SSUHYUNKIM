@@ -3,6 +3,9 @@ package christmas.controller;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.model.Date;
+import christmas.model.Menu;
+
+import java.util.Map;
 
 public class ChristmasController {
 
@@ -18,10 +21,16 @@ public class ChristmasController {
         outputView.printWelcomeMessage();
 
         Date dateOfVisit = getDateOfVisit();
+        Menu orderMenu = getOrderMenu();
     }
 
     private Date getDateOfVisit() {
         int date = inputView.getDate();
+        return null;
+    }
+
+    private Menu getOrderMenu() {
+        Map<String, Integer> menu = inputView.getMenu();
         return null;
     }
 }
