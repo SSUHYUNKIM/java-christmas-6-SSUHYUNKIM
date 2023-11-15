@@ -25,12 +25,22 @@ public class ChristmasController {
     }
 
     private Date getDateOfVisit() {
-        int date = inputView.getDate();
-        return null;
+        try {
+            int date = inputView.getDate();
+            return new Date(date);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getDateOfVisit();
+        }
     }
 
     private Menu getOrderMenu() {
-        Map<String, Integer> menu = inputView.getMenu();
-        return null;
+        try {
+            Map<String, Integer> menus = inputView.getMenu();
+            return new Menu(menus);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getOrderMenu();
+        }
     }
 }

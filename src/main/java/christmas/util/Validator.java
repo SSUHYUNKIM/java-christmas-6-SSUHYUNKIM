@@ -1,5 +1,9 @@
 package christmas.util;
 
+import christmas.model.Menus;
+
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static christmas.constant.NumericConstant.*;
@@ -76,6 +80,31 @@ public class Validator {
 
     private static boolean isEmpty(String userInput) {
         return userInput.isEmpty();
+    }
+
+    //여기서부터 추가 test 필요
+    public static void checkOrderedMenu(Map<String, Integer> inputValues) {
+        int totalAmount = 0;
+        for (Map.Entry<String, Integer> inputValue : inputValues.entrySet()) {
+            if (isNotExistOnMenu(inputValue.getKey()) || isReachMinimumAmount(inputValue.getValue())) {
+                throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
+            }
+            totalAmount += inputValue.getValue();
+        }
+        if (isExceedMaximumAmount(totalAmount)) {
+            throw new IllegalArgumentException(EXCEED_MAXIMUM_ERROR.getMessage());
+        }
+    }
+
+    private static boolean isNotExistOnMenu(String menuName) {
+        return Menus.getMenusByName(menuName).equals(Menus.NONE);
+    }
+
+    private static boolean isReachMinimumAmount(int amount) {
+        return amount < 1;
+    }
+    private static boolean isExceedMaximumAmount(int totalAmount) {
+        return totalAmount > 20;
     }
 
 }
