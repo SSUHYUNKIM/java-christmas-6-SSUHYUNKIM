@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import christmas.model.Date;
 
 public class ChristmasController {
 
@@ -14,6 +15,13 @@ public class ChristmasController {
     }
 
     public void run() {
+        outputView.printWelcomeMessage();
 
+        Date dateOfVisit = getDateOfVisit();
+    }
+
+    private Date getDateOfVisit() {
+        int date = inputView.getDate();
+        return null;
     }
 }

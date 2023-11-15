@@ -3,11 +3,11 @@ package christmas.util;
 import java.util.stream.Stream;
 
 import static christmas.constant.NumericConstant.*;
-import static christmas.util.ErrorMessage.*;
+import static christmas.util.message.ErrorMessage.*;
 
 public class Validator {
 
-    private static final String MENU_AMOUNT_SEPERATOR = "-";
+    private static final String MENU_AMOUNT_SEPARATOR = "-";
 
     public static void validateVisitDate(String inputValue) {
         checkNull(inputValue);
@@ -56,20 +56,21 @@ public class Validator {
     }
 
     public static void checkMenuAmountSeparator(String[] inputValue) {
-        if (!hasMenuAmountSeparator(inputValue)) {
+        if (hasNotMenuAmountSeparator(inputValue)) {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
         }
     }
 
-    private static boolean hasMenuAmountSeparator(String[] inputValue) {
+    private static boolean hasNotMenuAmountSeparator(String[] inputValue) {
         return Stream.of(inputValue)
-                .anyMatch((input) -> input.contains(MENU_AMOUNT_SEPERATOR));
+                .anyMatch((input) -> !input.contains(MENU_AMOUNT_SEPARATOR));
     }
 
     public static void checkValidOrder(String[] inputValue) {
         if (inputValue.length != 2 || isEmpty(inputValue[0]) || isEmpty(inputValue[1])) {
             throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
         }
+        //추후 수정
         checkIsInteger(inputValue[1]);
     }
 

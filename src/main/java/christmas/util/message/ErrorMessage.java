@@ -1,4 +1,4 @@
-package christmas.util;
+package christmas.util.message;
 
 public enum ErrorMessage {
     NULL_INPUT_ERROR("null은 입력할 수 없습니다."),
