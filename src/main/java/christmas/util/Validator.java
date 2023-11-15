@@ -1,9 +1,13 @@
 package christmas.util;
 
+import java.util.stream.Stream;
+
 import static christmas.constant.NumericConstant.*;
 import static christmas.util.ErrorMessage.*;
 
 public class Validator {
+
+    private static final String MENU_AMOUNT_SEPERATOR = "-";
 
     public static void validateVisitDate(String inputValue) {
         checkNull(inputValue);
@@ -30,7 +34,7 @@ public class Validator {
         }
     }
     private static void checkExistOfValue(String inputValue) {
-        if (inputValue.isEmpty()) {
+        if (isEmpty((inputValue))) {
             throw new IllegalArgumentException(EXIST_OF_VALUE_ERROR.getMessage());
         }
     }
@@ -49,6 +53,28 @@ public class Validator {
         if (date > MAX_DATE_NUMBER || date < MIN_DATE_NUMBER) {
             throw new IllegalArgumentException(INVALID_DATE_ERROR.getMessage());
         }
+    }
+
+    public static void checkMenuAmountSeparator(String[] inputValue) {
+        if (!hasMenuAmountSeparator(inputValue)) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
+        }
+    }
+
+    private static boolean hasMenuAmountSeparator(String[] inputValue) {
+        return Stream.of(inputValue)
+                .anyMatch((input) -> input.contains(MENU_AMOUNT_SEPERATOR));
+    }
+
+    public static void checkValidOrder(String[] inputValue) {
+        if (inputValue.length != 2 || isEmpty(inputValue[0]) || isEmpty(inputValue[1])) {
+            throw new IllegalArgumentException(INVALID_ORDER_ERROR.getMessage());
+        }
+        checkIsInteger(inputValue[1]);
+    }
+
+    private static boolean isEmpty(String userInput) {
+        return userInput.isEmpty();
     }
 
 }
